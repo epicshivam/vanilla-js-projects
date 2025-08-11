@@ -1,0 +1,50 @@
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16pt;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 100px;
+}
+
+.quiz-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;   
+  align-items: center;      
+  width: 100%;
+}
+
+.question {
+    text-align: center;
+}
+
+#options {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+}
+
+#options li {
+    background: #f0f0f0;
+    border-radius: 1000px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.option {
+    cursor: pointer;
+}
