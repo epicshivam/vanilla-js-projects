@@ -32,10 +32,21 @@ const updateResult = (data) => {
         weatherDiv.innerHTML = `<p>${data.message}</p>`;
         return;
     }
+
     weatherDiv.innerHTML = `
     
     <p>${data.name}</p>
     <p>${data.main.temp}</p>
     <p>${data.weather[0].description}</p>
+    <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
+    <p>${formatTime(data.sys.sunrise)}</p>
+    <p>${formatTime(data.sys.sunset)}</p>
     `;
+}
+
+
+const formatTime = (seconds) => {
+    const date = new Date(seconds*1000);
+    const localTime = date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    return localTime;
 }
