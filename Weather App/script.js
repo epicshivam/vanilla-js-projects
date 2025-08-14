@@ -51,7 +51,7 @@ const updateResult = (data) => {
             document.querySelector(".weather-icon").src = "images/snow.png";
         } 
 
-        document.querySelector(".weather").style = "block";
+        document.querySelector(".weather").style.display = "block";
     }
 
 }
