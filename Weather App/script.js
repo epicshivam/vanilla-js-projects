@@ -1,10 +1,9 @@
 import { API_KEY } from "./config.js";
 
-const inputEl = document.querySelector("input");
-const weatherDiv = document.querySelector('.weatherResult');
-const searchIcon = document.querySelector("#searchIcon");
+const inputEl = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
 
-searchIcon.addEventListener("click", (e) => {
+searchBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const city = inputEl.value.trim().toUpperCase();
     if (city) fetchWeather(city);
@@ -28,25 +27,31 @@ const fetchWeather = async (city)=> {
 
 
 const updateResult = (data) => {
-     if (data.cod !== 200) {
-        weatherDiv.innerHTML = `<p>${data.message}</p>`;
+     if (data.cod === '404') {
+        document.querySelector(".error").style.display = "block";
+        document.querySelector(".weather").style.display = "none";
         return;
+    } else {
+        document.querySelector(".temp").textContent = Math.round(data.main.temp) + "°C";
+        document.querySelector(".city").textContent = data.name;
+        document.querySelector(".humidity").textContent = data.main.humidity + "%";
+        document.querySelector(".wind").textContent = data.wind.speed + " km/h";
+
+        if(data.weather[0].main == "Clouds") {
+            document.querySelector(".weather-icon").src = "images/clouds.png";
+        } else if(data.weather[0].main == "Clear") {
+            document.querySelector(".weather-icon").src = "images/clear.png";
+        } else if(data.weather[0].main == "Drizzle") {
+            document.querySelector(".weather-icon").src = "images/drizzle.png";
+        } else if(data.weather[0].main == "Mist") {
+            document.querySelector(".weather-icon").src = "images/mist.png";
+        } else if(data.weather[0].main == "Rain") {
+            document.querySelector(".weather-icon").src = "images/rain.png";
+        } else {
+            document.querySelector(".weather-icon").src = "images/snow.png";
+        } 
+
+        document.querySelector(".weather").style = "block";
     }
 
-    weatherDiv.innerHTML = `
-    
-    <p>${data.name}</p>
-    <p>${data.main.temp}</p>
-    <p>${data.weather[0].description}</p>
-    <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
-    <p>${formatTime(data.sys.sunrise)}</p>
-    <p>${formatTime(data.sys.sunset)}</p>
-    `;
-}
-
-
-const formatTime = (seconds) => {
-    const date = new Date(seconds*1000);
-    const localTime = date.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-    return localTime;
 }
