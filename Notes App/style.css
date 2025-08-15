@@ -1,0 +1,22 @@
+.header-notes-app {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-buttons {
+    margin-top: 10px;
+    float: right;
+}
