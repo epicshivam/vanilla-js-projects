@@ -9,12 +9,14 @@ const noteInputField = document.getElementById("note-title");
 const submitBtn = document.getElementById("submit-btn");
 
 
+
 const updateNotes = () => {
     const notetitle = document.getElementById("note-title").value.trim();
     const notecontent = document.getElementById("note-content").value.trim();
 
     if(!notetitle) {
-        alert("Note Title Cannot be Empty")
+        alert("Note Title Cannot be Empty");
+        return;
     } 
     
      if (editingNoteId) {
@@ -41,7 +43,6 @@ const renderNotes = () => {
         const noteCard = document.createElement("div");
         noteCard.classList.add("note-card");
         noteCard.innerHTML = `
-
             <div class="note-card-header">
                 <h3>${note.title}</h3>
                 <div class="note-card-buttons">
@@ -53,7 +54,7 @@ const renderNotes = () => {
                     </button>
                 </div>
             </div>
-            <p>${note.content}</p>
+            <p class="note-card-content">${note.content}<p>
         `
         notesList.appendChild(noteCard);
     });
@@ -73,6 +74,11 @@ document.getElementById("notes-list").addEventListener("click", e => {
         startEdit(noteId);
     }
 });
+
+document.getElementById("back-btn").addEventListener("click",(e)=>{
+    e.preventDefault();
+    dialogBox.close();
+})
 
 
 const startEdit = (noteId) => {
