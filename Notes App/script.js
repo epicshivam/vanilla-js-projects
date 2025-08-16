@@ -33,6 +33,8 @@ const updateNotes = () => {
             content : notecontent
         })
     }
+
+    return true;
 }
 
 const renderNotes = () => {
@@ -54,7 +56,7 @@ const renderNotes = () => {
                     </button>
                 </div>
             </div>
-            <p class="note-card-content">${note.content}<p>
+            <p class="note-card-content">${note.content}</p>
         `
         notesList.appendChild(noteCard);
     });
@@ -96,11 +98,13 @@ const startEdit = (noteId) => {
 
 submitBtn.addEventListener("click", (e)=> {
     e.preventDefault();
-    updateNotes();
-    dialogBox.close();
-    document.getElementById("note-title").value = "";
-    document.getElementById("note-content").value = "";
-    renderNotes();
+    const success = updateNotes();
+    if (success) {
+        dialogBox.close();
+        document.getElementById("note-title").value = "";
+        document.getElementById("note-content").value = "";
+        renderNotes();
+    }
 })
 
 
